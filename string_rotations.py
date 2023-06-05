@@ -1,3 +1,6 @@
+import time
+
+
 def kmp(strg):
     p = [0 for _ in strg]
     j = -1
@@ -49,6 +52,8 @@ def count_rotations(s, t):
 
 def main():
     s, t = [], []
+    # s.append('z' * 50000 + 'a' * 300 + 'iib' * 300)
+    # t.append('iib' * 300 + 'z' * 50000 + 'a'*300)
     while True:
         line = input()
         if line == "":
@@ -57,9 +62,16 @@ def main():
         s.append(s1)
         t.append(t1)
     for i in range(len(s)):
-        print(count_rotations(s[i], t[i]))
-        # print(count_rotations_simple(s[i], t[i]))
+        # start = time.time()
+        rots = count_rotations(s[i], t[i])
+        print(rots)
+        # end_kmp = time.time()
+        # print(end_kmp-start)
+        # rots_simp = count_rotations_simple(s[i], t[i])
+        # print(rots_simp)
+        # end = time.time()
+        # print(end-end_kmp)
 
 
 if __name__ == '__main__':
-    main(input)
+    main()
