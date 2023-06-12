@@ -1,5 +1,7 @@
 import time
 
+from yogi import tokens
+
 
 def kmp(strg):
     p = [0 for _ in strg]
@@ -15,23 +17,9 @@ def kmp(strg):
     return p
 
 
-def count_rotations_simple(s, t):
-    if len(s) != len(t):
-        return 0
-
-    count = 0
-    n = len(s)
-
-    for i in range(n):
-        rotated = s[i:] + s[:i]
-        if rotated == t:
-            count += 1
-    return count
-
-
 def count_rotations(s, t):
     if len(s) != len(t):
-        return []
+        return 0
     if s == t:
         return len(s)
 
@@ -39,38 +27,33 @@ def count_rotations(s, t):
     s2 = s + s
     pattern = t + "#" + s2
     lps = kmp(pattern)
-
-    rotations = []
+    count = 0
     for i in range(n + 1, len(lps)):
         if lps[i] == n:
-            rotation_start = i - 2 * n
-            rotation = s2[rotation_start:rotation_start + n]
-            rotations.append(rotation)
+            count += 1
 
-    return len(rotations)
+    return count
 
 
 def main():
     s, t = [], []
-    # s.append('z' * 50000 + 'a' * 300 + 'iib' * 300)
-    # t.append('iib' * 300 + 'z' * 50000 + 'a'*300)
-    while True:
-        line = input()
-        if line == "":
-            break
-        s1, t1 = line.split(" ")
-        s.append(s1)
-        t.append(t1)
+    # s.append('ab'*10000)
+    # t.append('ba'*10000)
+    #
+    # s.append('abbabb')
+    # t.append('babbab')
+    for i, x in enumerate(tokens(str)):
+        if i % 2 == 0:
+            s.append(x)
+        else:
+            t.append(x)
+
     for i in range(len(s)):
         # start = time.time()
         rots = count_rotations(s[i], t[i])
-        print(rots)
-        # end_kmp = time.time()
-        # print(end_kmp-start)
-        # rots_simp = count_rotations_simple(s[i], t[i])
-        # print(rots_simp)
         # end = time.time()
-        # print(end-end_kmp)
+        # print(end-start)
+        print(rots)
 
 
 if __name__ == '__main__':

@@ -1,6 +1,5 @@
 import time
-
-from easyinput import read_line
+from yogi import tokens
 
 
 def kmp(strg):
@@ -31,51 +30,49 @@ def longest_palindrome_suffix(s):
     length = lps[-1]
 
     # Extract the longest palindrome suffix from the original string
-    palindrome_suffix = s[-length:] if length > 0 else ''
+    # palindrome_suffix = s[-length:] if length > 0 else ''
 
-    return palindrome_suffix
+    # return palindrome_suffix
+    return length
+
+# def is_palindrome(s):
+#     """
+#     Check if a string is a palindrome.
+#     """
+#     return s == s[::-1]
 
 
-def is_palindrome(s):
-    """
-    Check if a string is a palindrome.
-    """
-    return s == s[::-1]
-
-
-def longest_palindrome_suffix_simp(s):
-    """
-    Find the longest suffix that is a palindrome using a naive approach.
-    """
-    longest_suffix = ""
-    n = len(s)
-
-    for i in range(n):
-        suffix = s[i:]
-        if is_palindrome(suffix) and len(suffix) > len(longest_suffix):
-            longest_suffix = suffix
-
-    return longest_suffix
+# def longest_palindrome_suffix_simp(s):
+#     """
+#     Find the longest suffix that is a palindrome using a naive approach.
+#     """
+#     longest_suffix = ""
+#     n = len(s)
+#
+#     for i in range(n):
+#         suffix = s[i:]
+#         if is_palindrome(suffix) and len(suffix) > len(longest_suffix):
+#             longest_suffix = suffix
+#
+#     return longest_suffix
 
 
 def main():
     s = []
-    while True:
-        strg = input()
-        if strg == "":
-            break
-        s.append(strg)
-    for strg in s:
-        # start = time.time()
-        pal = longest_palindrome_suffix(strg)
-        # end_soph = time.time()
-        print(len(pal))
-        # print(end_soph-start)
-        # pal_simp = longest_palindrome_suffix_simp(strg)
-        # end_simp = time.time()
-        # print(len(pal_simp))
-        # print(end_simp-end_soph)
-
+    # s.append('i')
+    # s.append('anna')
+    # s.append('abcbapep')
+    # s.append('zzzzzzzz')
+    # s.append('buenopuesmoltbepuesadios')
+    # s.append('abba')
+    # s.append('abc' * 2)
+    for i, x in enumerate(tokens(str)):
+        s.append(x)
+    for i in range(len(s)):
+        rots = longest_palindrome_suffix(s[i])
+        # rots_simp = longest_palindrome_suffix_simp(s[i])
+        # print(len(rots_simp))
+        print(rots)
 
 
 if __name__ == '__main__':
