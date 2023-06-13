@@ -1,5 +1,4 @@
 import time
-
 from yogi import tokens
 
 
@@ -20,8 +19,6 @@ def kmp(strg):
 def count_rotations(s, t):
     if len(s) != len(t):
         return 0
-    if s == t:
-        return len(s)
 
     n = len(s)
     s2 = s + s
@@ -32,16 +29,19 @@ def count_rotations(s, t):
         if lps[i] == n:
             count += 1
 
+    if s == t:
+        return count - 1
+
     return count
 
 
 def main():
     s, t = [], []
-    # s.append('ab'*10000)
-    # t.append('ba'*10000)
+    s.append('abc'*10000)
+    t.append('bca'*10000)
     #
-    # s.append('abbabb')
-    # t.append('babbab')
+    # s.append("zqzzqzzqz")
+    # t.append("zqzzqzzqz")
     for i, x in enumerate(tokens(str)):
         if i % 2 == 0:
             s.append(x)
